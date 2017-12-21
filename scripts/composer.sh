@@ -17,6 +17,7 @@ COMPOSER_IS_INSTALLED=$?
 # Getting the arguments
 GITHUB_OAUTH=$1
 COMPOSER_PACKAGES=$2
+COMPOSER_ARGS=$3
 
 # True, if composer is not installed
 if [[ $COMPOSER_IS_INSTALLED -ne 0 ]]; then
@@ -81,6 +82,6 @@ if [[ ! -z $COMPOSER_PACKAGES ]]; then
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
         hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer global require ${COMPOSER_PACKAGES[@]}
     else
-        composer global require ${COMPOSER_PACKAGES[@]}
+        composer global require ${COMPOSER_PACKAGES[@]} ${COMPOSER_ARGS[@]}
     fi
 fi
